@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Medico Friendly</title>
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Medico</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><span>🏠</span> Dashboard</a></li>
+                    <li><a href="/profile"><span>👤</span> Profile</a></li>
+                    <li><a href="/health-stats"><span>📊</span> Health Stats</a></li>
+                    <li><a href="/settings" class="active"><span>⚙️</span> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Header -->
+            <header>
+                <div class="header-content">
+                    <h2>Settings</h2>
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+            </header>
+
+            <!-- Settings Form -->
+            <section class="settings-form card">
+                <h3>Account Settings</h3>
+
+                <!-- Change Password -->
+                <div class="setting-group">
+                    <h4>Change Password</h4>
+                    <form id="changePasswordForm" action="/change-password" method="POST">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <button type="submit">Change Password</button>
+                    </form>
+                </div>
+
+                <!-- Update Email -->
+                <div class="setting-group">
+                    <h4>Update Email</h4>
+                    <form id="updateEmailForm" action="/update-email" method="POST">
+                        <div class="form-group">
+                            <label for="newEmail">New Email:</label>
+                            <input type="email" id="newEmail" name="newEmail" required>
+                        </div>
+                        <button type="submit">Update Email</button>
+                    </form>
+                </div>
+
+                <!-- Update Activity Level -->
+                <div class="setting-group">
+                    <h4>Update Activity Level</h4>
+                    <form id="updateActivityLevelForm" action="/update-activity-level" method="POST">
+                        <div class="form-group">
+                            <label for="activityLevel">Activity Level:</label>
+                            <select id="activityLevel" name="activityLevel" required>
+                                <option value="sedentary">Sedentary (Little or no exercise)</option>
+                                <option value="lightlyActive">Lightly Active (Light exercise/sports 1-3 days/week)</option>
+                                <option value="moderatelyActive">Moderately Active (Moderate exercise/sports 3-5 days/week)</option>
+                                <option value="veryActive">Very Active (Hard exercise/sports 6-7 days/week)</option>
+                                <option value="extraActive">Extra Active (Very hard exercise/sports & physical job)</option>
+                            </select>
+                        </div>
+                        <button type="submit">Update Activity Level</button>
+                    </form>
+                </div>
+
+                <!-- Notification Preferences -->
+                <div class="setting-group">
+                    <h4>Notification Preferences</h4>
+                    <form id="notificationPreferencesForm" action="/update-notifications" method="POST">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="emailNotifications" checked> Email Notifications
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="pushNotifications" checked> Push Notifications
+                            </label>
+                        </div>
+                        <button type="submit">Save Preferences</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Optional: Add JavaScript for form submission -->
+    <script>
+        // Add JavaScript for handling form submissions (optional)
+        document.getElementById("changePasswordForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch("/change-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert("Password changed successfully!");
+            } else {
+                alert("Failed to change password. Please try again.");
+            }
+        });
+
+        // Add similar event listeners for other forms
+    </script>
+</body>
+</html>     

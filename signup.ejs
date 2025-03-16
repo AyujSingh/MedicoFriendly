@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="signupstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="signup-box">
+        <h2>Signup</h2>
+        <form id="signup-form" onsubmit="sendOTP(event)">
+            <input type="text" name="uname" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" id="send-otp-btn">Send OTP</button>
+            <p class="error" id="error-message"></p>
+        </form>
+        
+        <div id="otp-section" style="display: none;">
+            <h3>Enter OTP</h3>
+            <input type="text" id="otp" placeholder="Enter OTP" required>
+            <button onclick="verifyOTP(event)" id="verify-otp-btn">Verify OTP</button>
+        </div>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function sendOTP(event) {
+            event.preventDefault();
+
+            let form = document.getElementById("signup-form");
+            let formData = new FormData(form);
+            let sendOTPButton = document.getElementById("send-otp-btn");
+            sendOTPButton.disabled = true;
+            document.getElementById("error-message").innerText = "";
+            document.getElementById("message").innerText = "";
+
+            fetch("/signup", {
+                method: "POST",
+                body: new URLSearchParams(formData),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json())  // Expecting JSON response
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("message").innerText = "✅ OTP sent successfully!";
+                    document.getElementById("otp-section").style.display = "block";
+                } else {
+                    document.getElementById("error-message").innerText = data.message || "Error sending OTP. Try again.";
+                    sendOTPButton.disabled = false;
+                }
+            })
+            .catch(err => {
+                document.getElementById("error-message").innerText = "❌ Failed to send OTP. Try again.";
+                sendOTPButton.disabled = false;
+            });
+        }
+
+        function verifyOTP(event) {
+            event.preventDefault();
+
+            let otp = document.getElementById("otp").value.trim();
+            let email = document.querySelector("input[name='email']").value;
+            let uname = document.querySelector("input[name='uname']").value;
+            let password = document.querySelector("input[name='password']").value;
+            let verifyOTPButton = document.getElementById("verify-otp-btn");
+            verifyOTPButton.disabled = true;
+            document.getElementById("message").innerText = "";
+
+            fetch("/verify-otp", {
+                method: "POST",
+                body: new URLSearchParams({ email, otp, uname, password }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(res => res.json()) // Expecting JSON response
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem("userEmail", email); // ✅ Store email in localStorage
+                    window.location.href = data.redirectUrl; // Redirect to basic info form
+                } else {
+                    document.getElementById("message").innerText = "❌ Invalid OTP. Please try again.";
+                    verifyOTPButton.disabled = false;
+                }
+            })
+            .catch(err => {
+                document.getElementById("message").innerText = "❌ Failed to verify OTP. Try again.";
+                verifyOTPButton.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+/* Light Theme (Default) */
+:root {
+    --background-color: #f8fafc;
+    --text-color: #1e293b;
+    --sidebar-bg: #ffffff;
+    --card-bg: #ffffff;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --accent-color: #3b82f6;
+    --link-color: #64748b;
+    --link-hover-bg: #f1f5f9;
+    --active-link-bg: #3b82f6;
+    --active-link-color: #ffffff;
+    --button-bg: #3b82f6;
+    --button-hover-bg: #2563eb;
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --checkbox-bg: #f1f5f9;
+    --checkbox-hover-bg: #e2e8f0;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --sidebar-bg: #1e1e1e;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --accent-color: #3b82f6;
+    --link-color: #a0a0a0;
+    --link-hover-bg: #333333;
+    --active-link-bg: #3b82f6;
+    --active-link-color: #ffffff;
+    --button-bg: #3b82f6;
+    --button-hover-bg: #2563eb;
+    --input-bg: #2d2d2d;
+    --input-border: #444444;
+    --checkbox-bg: #333333;
+    --checkbox-hover-bg: #444444;
+}
+
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .logo h1 {
+    font-size: 1.8em;
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: var(--link-hover-bg);
+    color: var(--text-color);
+}
+
+.sidebar nav ul li a.active {
+    background-color: var(--active-link-bg);
+    color: var(--active-link-color);
+}
+
+.sidebar nav ul li a span {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+    font-size: 1.5em;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.logout-btn {
+    background-color: var(--button-bg);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 1.3em;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.info-grid, .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.info-grid div, .stats-grid div {
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+.symptom-checker .symptom-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.symptom-checker label {
+    display: flex;
+    align-items: center;
+    background-color: var(--checkbox-bg);
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.symptom-checker label:hover {
+    background-color: var(--checkbox-hover-bg);
+}
+
+.symptom-checker input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--button-bg);
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .info-grid, .stats-grid, .symptom-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-toggle label {
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+.theme-toggle input[type="checkbox"] {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle input[type="checkbox"]:checked {
+    background-color: var(--accent-color);
+}
+
+.theme-toggle input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+}

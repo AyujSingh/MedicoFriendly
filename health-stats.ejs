@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Stats - Medico Friendly</title>
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Medico</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><span>🏠</span> Dashboard</a></li>
+                    <li><a href="/profile"><span>👤</span> Profile</a></li>
+                    <li><a href="/health-stats" class="active"><span>📊</span> Health Stats</a></li>
+                    <li><a href="/settings"><span>⚙️</span> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            
+
+            <!-- Health Stats Cards -->
+            <section class="health-stats">
+                <!-- BMI Card -->
+                <div class="card">
+                    <h3>Body Mass Index (BMI)</h3>
+                    <div class="stat-value"><%= bmi %></div>
+                    <div class="progress-bar">
+                        <<div class="progress" style="width: <%= isNaN(bmi) ? 0 : (bmi / 40) * 100 + '%' %>; "></div>
+                    </div>
+                    <p class="stat-description">
+                        <% if (bmi < 18.5) { %>
+                            Underweight
+                        <% } else if (bmi >= 18.5 && bmi < 25) { %>
+                            Normal weight
+                        <% } else if (bmi >= 25 && bmi < 30) { %>
+                            Overweight
+                        <% } else { %>
+                            Obese
+                        <% } %>
+                    </p>
+                </div>
+
+                <!-- Calorie Intake Card -->
+                <div class="card">
+                    <h3>Daily Calorie Intake</h3>
+                    <div class="stat-value"><%= calorieIntake %> kcal</div>
+                    <p class="stat-description">Based on your activity level and body metrics.</p>
+                </div>
+
+                <!-- Weight Progress Card -->
+                <div class="card">
+                    <h3>Weight Progress</h3>
+                    <canvas id="weightChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Weight Progress Chart
+        const weightData = {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Weight (kg)",
+                data: [80, 78, 76, 75, 74, 73], // Example data
+                borderColor: "#1abc9c",
+                fill: false,
+            }],
+        };
+
+        const weightChart = new Chart(document.getElementById("weightChart"), {
+            type: "line",
+            data: weightData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                    },
+                },
+            },
+        });
+    </script>
+</body>
+</html>

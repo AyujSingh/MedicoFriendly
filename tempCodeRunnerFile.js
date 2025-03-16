@@ -1,0 +1,1 @@
+if (!otpStore[email] || otpStore[email].toString() !== otp.trim());

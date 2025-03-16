@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Medico Friendly</title>
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Medico</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><span>🏠</span> Dashboard</a></li>
+                    <li><a href="/profile" class="active"><span>👤</span> Profile</a></li>
+                    <li><a href="/health-stats"><span>📊</span> Health Stats</a></li>
+                    <li><a href="/settings"><span>⚙️</span> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Header -->
+            
+
+            <!-- Profile Form -->
+            <section class="profile-form card">
+                <h3>Update Your Information</h3>
+                <form id="profileForm" action="/update-profile" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="<%= uname %>" required>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" name="gender" required>
+                            <option value="Male" <%= gender === 'Male' ? 'selected' : '' %>>Male</option>
+                            <option value="Female" <%= gender === 'Female' ? 'selected' : '' %>>Female</option>
+                            <option value="Other" <%= gender === 'Other' ? 'selected' : '' %>>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" value="<%= age %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height">Height (cm):</label>
+                        <input type="number" id="height" name="height" value="<%= height %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weight">Weight (kg):</label>
+                        <input type="number" id="weight" name="weight" value="<%= weight %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="activityLevel">Activity Level:</label>
+                        <select id="activityLevel" name="activityLevel" required>
+                            <option value="sedentary" <%= activityLevel === 'sedentary' ? 'selected' : '' %>>Sedentary (Little or no exercise)</option>
+                            <option value="lightlyActive" <%= activityLevel === 'lightlyActive' ? 'selected' : '' %>>Lightly Active (Light exercise/sports 1-3 days/week)</option>
+                            <option value="moderatelyActive" <%= activityLevel === 'moderatelyActive' ? 'selected' : '' %>>Moderately Active (Moderate exercise/sports 3-5 days/week)</option>
+                            <option value="veryActive" <%= activityLevel === 'veryActive' ? 'selected' : '' %>>Very Active (Hard exercise/sports 6-7 days/week)</option>
+                            <option value="extraActive" <%= activityLevel === 'extraActive' ? 'selected' : '' %>>Extra Active (Very hard exercise/sports & physical job)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Update Profile</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Optional: Add JavaScript for AJAX form submission -->
+    <script>
+        document.getElementById("profileForm").addEventListener("submit", async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(e.target); // Get form data
+            const response = await fetch("/update-profile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(Object.fromEntries(formData)), // Convert form data to JSON
+            });
+
+            const result = await response.json(); // Parse the response
+            if (result.success) {
+                alert("Profile updated successfully!"); // Show success message
+                window.location.href = "/profile"; // Redirect to the profile page
+            } else {
+                alert("Failed to update profile. Please try again."); // Show error message
+            }
+        });
+    </script>
+</body>
+</html>

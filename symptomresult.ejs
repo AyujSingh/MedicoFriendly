@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Results - Medico Friendly</title>
+    <link rel="stylesheet" href="homepg.css"> <!-- Your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Medico Friendly</h1>
+            <p>Welcome, <%= uname %>!</p>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <section class="symptom-results">
+                <h2>Symptom Checker Results</h2>
+                <h3>Possible Conditions:</h3>
+                <ul>
+                    <% conditions.forEach(condition => { %>
+                        <li><strong><%= condition.name %></strong> (Probability: <%= (condition.probability * 100).toFixed(2) %>%)</li>
+                    <% }); %>
+                </ul>
+                <a href="/home" class="back-btn">Go Back</a>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2023 Medico Friendly. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="/scripts.js"></script>
+</body>
+</html>

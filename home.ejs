@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medico Friendly</title>
+    <link rel="stylesheet" href="homepg.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Medico</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home" class="active"><span>🏠</span> Dashboard</a></li>
+                    <li><a href="/profile"><span>👤</span> Profile</a></li>
+                    <li><a href="/health-stats"><span>📊</span> Health Stats</a></li>
+                    <li><a href="/settings"><span>⚙️</span> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Header -->
+            <header>
+                <div class="header-content">
+                    <h2>Welcome, <%= uname %>!</h2>
+                    <div class="theme-toggle">
+                        <label for="theme-switch">Dark Mode</label>
+                        <input type="checkbox" id="theme-switch">
+                    </div>
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+            </header>
+
+            <!-- User Information -->
+            <section class="user-info card">
+                <h3>Your Information</h3>
+                <div class="info-grid">
+                    <div><strong>Name:</strong> <%= uname %></div>
+                    <div><strong>Email:</strong> <%= email %></div>
+                    <div><strong>Gender:</strong> <%= gender %></div>
+                    <div><strong>Age:</strong> <%= age %></div>
+                    <div><strong>Height:</strong> <%= height %> cm</div>
+                    <div><strong>Weight:</strong> <%= weight %> kg</div>
+                </div>
+            </section>
+
+            <!-- Health Stats -->
+            <section class="health-stats card">
+                <h3>Health Stats</h3>
+                <div class="stats-grid">
+                    <div><strong>BMI:</strong> <%= bmi %></div>
+                    <div><strong>Daily Calorie Intake:</strong> <%= calorieIntake %> kcal</div>
+                </div>
+            </section>
+
+            <!-- Symptom Checker -->
+            <section class="symptom-checker card">
+                <h3>Symptom Checker</h3>
+                <form id="symptomForm" action="/check-symptoms" method="POST">
+                    <div class="symptom-options">
+                        <label><input type="checkbox" name="symptoms" value="fever"> Fever</label>
+                        <label><input type="checkbox" name="symptoms" value="headache"> Headache</label>
+                        <label><input type="checkbox" name="symptoms" value="cough"> Cough</label>
+                        <label><input type="checkbox" name="symptoms" value="sore_throat"> Sore Throat</label>
+                        <label><input type="checkbox" name="symptoms" value="fatigue"> Fatigue</label>
+                        <label><input type="checkbox" name="symptoms" value="nausea"> Nausea</label>
+                        <label><input type="checkbox" name="symptoms" value="shortness_of_breath"> Shortness of Breath</label>
+                        <label><input type="checkbox" name="symptoms" value="chest_pain"> Chest Pain</label>
+                        <label><input type="checkbox" name="symptoms" value="abdominal_pain"> Abdominal Pain</label>
+                        <label><input type="checkbox" name="symptoms" value="dizziness"> Dizziness</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration of symptoms:</label>
+                        <select id="duration" name="duration" required>
+                            <option value="1">Less than 1 day</option>
+                            <option value="2">1-3 days</option>
+                            <option value="3">4-7 days</option>
+                            <option value="4">More than 7 days</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="severity">Severity:</label>
+                        <select id="severity" name="severity" required>
+                            <option value="1">Mild</option>
+                            <option value="2">Moderate</option>
+                            <option value="3">Severe</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Check Symptoms</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
