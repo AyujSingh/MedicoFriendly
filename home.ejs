@@ -5,103 +5,333 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medico Friendly</title>
     <link rel="stylesheet" href="homepg.css">
+    <link rel="stylesheet" href="health.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .combined-widget {
+            margin-top: 20px;
+        }
+        .card-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--input-border);
+            margin-bottom: 1rem;
+        }
+        .tab-btn {
+            padding: 0.75rem 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--link-color);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            color: var(--accent-color);
+        }
+        .tab-btn.active {
+            color: var(--accent-color);
+        }
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        .medication-list {
+            list-style: none;
+            padding: 0;
+        }
+        .medication-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed var(--input-border);
+        }
+        .medication-list li:last-child {
+            border-bottom: none;
+        }
+        .medication-list li.taken {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        .mark-taken {
+            background: var(--success-color);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tip-content {
+            padding: 1rem 0;
+            font-size: 0.95rem;
+        }
+        .tip-content strong {
+            color: var(--accent-color);
+        }
+        .refresh-tip {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <h1>Medico</h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="/home" class="active"><span>🏠</span> Dashboard</a></li>
-                    <li><a href="/profile"><span>👤</span> Profile</a></li>
-                    <li><a href="/health-stats"><span>📊</span> Health Stats</a></li>
-                    <li><a href="/settings"><span>⚙️</span> Settings</a></li>
+                    <li><a href="/home" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="/health-stats"><i class="fas fa-chart-line"></i> Health Stats</a></li>
+                    <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main>
-            <!-- Header -->
             <header>
                 <div class="header-content">
-                    <h2>Welcome, <%= uname %>!</h2>
-                    <div class="theme-toggle">
-                        <label for="theme-switch">Dark Mode</label>
-                        <input type="checkbox" id="theme-switch">
+                    <h2>Welcome, <span class="username"><%= user.name %></span>!</h2>
+                    <div class="header-actions">
+                        <div class="theme-toggle">
+                            <label for="theme-switch">
+                                <i class="fas fa-moon"></i>
+                                <span>Dark Mode</span>
+                            </label>
+                            <input type="checkbox" id="theme-switch">
+                        </div>
+                        <a href="/logout" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
                     </div>
-                    <a href="/logout" class="logout-btn">Logout</a>
                 </div>
             </header>
 
-            <!-- User Information -->
-            <section class="user-info card">
-                <h3>Your Information</h3>
-                <div class="info-grid">
-                    <div><strong>Name:</strong> <%= uname %></div>
-                    <div><strong>Email:</strong> <%= email %></div>
-                    <div><strong>Gender:</strong> <%= gender %></div>
-                    <div><strong>Age:</strong> <%= age %></div>
-                    <div><strong>Height:</strong> <%= height %> cm</div>
-                    <div><strong>Weight:</strong> <%= weight %> kg</div>
-                </div>
-            </section>
-
-            <!-- Health Stats -->
-            <section class="health-stats card">
-                <h3>Health Stats</h3>
-                <div class="stats-grid">
-                    <div><strong>BMI:</strong> <%= bmi %></div>
-                    <div><strong>Daily Calorie Intake:</strong> <%= calorieIntake %> kcal</div>
-                </div>
-            </section>
-
-            <!-- Symptom Checker -->
-            <section class="symptom-checker card">
-                <h3>Symptom Checker</h3>
-                <form id="symptomForm" action="/check-symptoms" method="POST">
-                    <div class="symptom-options">
-                        <label><input type="checkbox" name="symptoms" value="fever"> Fever</label>
-                        <label><input type="checkbox" name="symptoms" value="headache"> Headache</label>
-                        <label><input type="checkbox" name="symptoms" value="cough"> Cough</label>
-                        <label><input type="checkbox" name="symptoms" value="sore_throat"> Sore Throat</label>
-                        <label><input type="checkbox" name="symptoms" value="fatigue"> Fatigue</label>
-                        <label><input type="checkbox" name="symptoms" value="nausea"> Nausea</label>
-                        <label><input type="checkbox" name="symptoms" value="shortness_of_breath"> Shortness of Breath</label>
-                        <label><input type="checkbox" name="symptoms" value="chest_pain"> Chest Pain</label>
-                        <label><input type="checkbox" name="symptoms" value="abdominal_pain"> Abdominal Pain</label>
-                        <label><input type="checkbox" name="symptoms" value="dizziness"> Dizziness</label>
+            <div class="dashboard-content">
+                <section class="user-info card">
+                    <div class="card-header">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Your Information</h3>
                     </div>
-
-                    <div class="form-group">
-                        <label for="duration">Duration of symptoms:</label>
-                        <select id="duration" name="duration" required>
-                            <option value="1">Less than 1 day</option>
-                            <option value="2">1-3 days</option>
-                            <option value="3">4-7 days</option>
-                            <option value="4">More than 7 days</option>
-                        </select>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-user-tag"></i> Name:</span>
+                            <span class="info-value"><%= user.name %></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-envelope"></i> Email:</span>
+                            <span class="info-value"><%= user.email %></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-venus-mars"></i> Gender:</span>
+                            <span class="info-value"><%= user.gender %></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-birthday-cake"></i> Age:</span>
+                            <span class="info-value"><%= user.age %></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-ruler-vertical"></i> Height:</span>
+                            <span class="info-value"><%= user.height %> cm</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fas fa-weight"></i> Weight:</span>
+                            <span class="info-value"><%= user.weight %> kg</span>
+                        </div>
                     </div>
+                </section>
 
-                    <div class="form-group">
-                        <label for="severity">Severity:</label>
-                        <select id="severity" name="severity" required>
-                            <option value="1">Mild</option>
-                            <option value="2">Moderate</option>
-                            <option value="3">Severe</option>
-                        </select>
+                <section class="health-stats card">
+                    <div class="card-header">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Health Stats</h3>
                     </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <i class="fas fa-calculator"></i>
+                                <span>BMI</span>
+                            </div>
+                            <div class="stat-value"><%= bmi %></div>
+                            <div class="stat-description">
+                                <% if (bmi < 18.5) { %>
+                                    Underweight
+                                <% } else if (bmi >= 18.5 && bmi < 25) { %>
+                                    Healthy
+                                <% } else if (bmi >= 25 && bmi < 30) { %>
+                                    Overweight
+                                <% } else { %>
+                                    Obese
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <i class="fas fa-fire"></i>
+                                <span>Daily Calories</span>
+                            </div>
+                        
+<div class="stat-value"><%= typeof calorieIntake !== 'undefined' ? calorieIntake : 'N/A' %></div>
+                            <div class="stat-description">kcal recommended</div>
+                        </div>
+                    </div>
+                </section>
 
-                    <button type="submit">Check Symptoms</button>
-                </form>
-            </section>
+                <section class="combined-widget card">
+                    <div class="card-tabs">
+                        <button class="tab-btn active" data-tab="medication">
+                            <i class="fas fa-pills"></i> Medication
+                        </button>
+                        <button class="tab-btn" data-tab="tips">
+                            <i class="fas fa-lightbulb"></i> Health Tips
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div id="medication" class="tab-pane active">
+                            <div class="no-meds-message">
+                                <i class="fas fa-info-circle"></i>
+                                <p>No medications scheduled for today</p>
+                            </div>
+                        </div>
+                        
+                        <div id="tips" class="tab-pane">
+                            <div class="tip-content">
+                                <% if (bmi >= 25) { %>
+                                    <p><i class="fas fa-walking"></i> <strong>Walk 10k steps today</strong> - Helps manage weight effectively and improves cardiovascular health.</p>
+                                <% } else { %>
+                                    <p><i class="fas fa-tint"></i> <strong>Drink 2L water</strong> - Proper hydration improves cognitive function and energy levels.</p>
+                                <% } %>
+                            </div>
+                            <button class="refresh-tip">
+                                <i class="fas fa-sync-alt"></i> Get New Tip
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="quick-actions card">
+                    <div class="card-header">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="quick-actions-grid">
+                        <a href="/symptom-checker" class="quick-action-btn">
+                            <i class="fas fa-thermometer-half"></i>
+                            <span>Check Symptoms</span>
+                        </a>
+                        <a href="/health-stats" class="quick-action-btn">
+                            <i class="fas fa-chart-line"></i>
+                            <span>View Health Stats</span>
+                        </a>
+                        <a href="/profile" class="quick-action-btn">
+                            <i class="fas fa-user"></i>
+                            <span>Update Profile</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
         </main>
     </div>
+    
+ <!-- Chatbox Widget - Place this right before </body> -->
+<div class="chatbox-container" id="medico-chatbox">
+    <div class="chatbox-header" id="chatbox-toggle">
+        <h4>Medico Assistant</h4>
+        <i class="fas fa-comment"></i>
+    </div>
+    <div class="chatbox-body">
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                <p>Hello! I'm your Medico assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message..." id="chat-input-field" autocomplete="off">
+            <button id="send-message-btn" type="button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+    <script>
+        // Tab Functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn, .tab-pane').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
 
-    <script src="script.js"></script>
+        // Refresh Health Tip
+        document.querySelector('.refresh-tip')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tips = [
+                { icon: 'fas fa-apple-alt', text: '<strong>Eat more fruits/vegetables</strong> - Aim for 5 servings daily for better nutrition.' },
+                { icon: 'fas fa-moon', text: '<strong>Sleep 7-9 hours</strong> - Quality sleep boosts immunity and mental health.' },
+                { icon: 'fas fa-running', text: '<strong>30min exercise daily</strong> - Reduces risk of chronic diseases.' }
+            ];
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            
+            document.querySelector('.tip-content').innerHTML = `
+                <p><i class="${randomTip.icon}"></i> ${randomTip.text}</p>
+            `;
+        });
+
+        // Theme toggle functionality
+        const themeSwitch = document.getElementById('theme-switch');
+        const body = document.body;
+        
+        if (localStorage.getItem('theme') === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeSwitch.checked = true;
+        }
+        
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+    
+<script src="/script.js"></script>
+</body>
 </body>
 </html>
