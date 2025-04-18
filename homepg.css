@@ -292,3 +292,142 @@ button:hover {
 .theme-toggle input[type="checkbox"]:checked::before {
     transform: translateX(20px);
 }
+/* Add to your homepg.css */
+.welcome-banner {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    margin-bottom: 20px;
+}
+
+.welcome-banner .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.welcome-banner .banner-illustration img {
+    height: 120px;
+}
+
+.circular-progress {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.progress-ring-circle {
+    transition: stroke-dashoffset 0.5s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.quick-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border: none;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.quick-action-btn:hover {
+    transform: translateY(-3px);
+}
+
+.quick-action-btn i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+.stat-category.underweight {
+    color: #3b82f6; /* Blue for underweight */
+}
+.stat-category.healthy {
+    color: #10b981; /* Green for healthy */
+}
+.stat-category.overweight {
+    color: #f59e0b; /* Yellow for overweight */
+}
+.stat-category.obese {
+    color: #ef4444; /* Red for obese */
+}
+
+
+
+.dashboard-content .card {
+    transition: transform 0.2s ease; /* Subtle hover */
+}
+
+.dashboard-content .card:hover {
+    transform: translateY(-2px); /* Tiny lift effect */
+}
+
+/* More prominent stat values (dashboard only) */
+.dashboard-content .stat-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent-color); /* Uses your existing color */
+}
+
+/* Better spacing for dashboard sections */
+.dashboard-content section {
+    margin-bottom: 2rem;
+}
+/* Add to homepg.css */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.quick-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    border: 1px solid var(--input-border);
+    text-align: center;
+}
+
+.quick-action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-color);
+}
+
+.quick-action-btn i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.quick-action-btn span {
+    font-weight: 500;
+}
