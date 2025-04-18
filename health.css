@@ -46,3 +46,634 @@
     color: #555;
     margin-top: 10px;
 }
+/* Health Stats Specific Styles */
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.chart-container {
+    height: 300px;
+    margin-top: 1.5rem;
+}
+
+.bmi-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.bmi-category {
+    text-align: center;
+}
+
+.bmi-category.active {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.no-meds-message {
+    text-align: center;
+    padding: 1rem;
+    color: var(--link-color);
+}
+
+.no-meds-message i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.no-meds-message p {
+    margin: 0;
+}
+/* Enhanced Symptom Checker Styles */
+.symptom-checker-steps {
+    position: relative;
+    min-height: 400px;
+}
+
+.step {
+    display: none;
+    padding: 1rem;
+}
+
+.step.active {
+    display: block;
+}
+
+.symptom-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.symptom-category {
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: var(--card-shadow);
+}
+
+.symptom-category h5 {
+    margin-top: 0;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.symptom-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.symptom-option {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.symptom-option:hover {
+    background-color: var(--link-hover-bg);
+}
+
+.symptom-option input {
+    margin-right: 0.75rem;
+}
+
+.symptom-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.condition-card {
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.condition-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.condition-probability {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.condition-details {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+/* Add to health.css */
+.high-probability {
+    color: #ef4444; /* Red for high probability */
+}
+
+.medium-probability {
+    color: #f59e0b; /* Orange for medium probability */
+}
+
+.low-probability {
+    color: #10b981; /* Green for low probability */
+}
+
+.condition-warning {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.disclaimer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 2rem;
+}
+
+.no-results i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    text-align: center;
+    padding: 2rem;
+    color: #ef4444;
+}
+
+.error-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.success-color {
+    color: #10b981;
+}
+/* Chatbox Styles */
+#medico-chatbox {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 300px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--input-border);
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#medico-chatbox.minimized {
+    height: 50px;
+    width: 50px;
+}
+
+#medico-chatbox.minimized .chatbox-body {
+    display: none;
+}
+
+#medico-chatbox.minimized .chatbox-header h4 {
+    display: none;
+}
+
+#medico-chatbox.minimized .chatbox-header i {
+    margin: 0 auto;
+}
+.chatbox-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 1px solid var(--input-border);
+    transform: translateY(0);
+}
+
+
+.chatbox-header {
+    padding: 12px 15px;
+    background-color: var(--accent-color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.chatbox-header h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.chatbox-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: none;
+}
+
+
+.chatbox-body {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-top-left-radius: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: var(--accent-color);
+    color: white;
+    border-top-right-radius: 4px;
+}
+.chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: var(--card-bg);
+}
+.chat-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--input-border);
+    border-radius: 20px;
+    outline: none;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.chat-input button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.chat-input button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Minimized state */
+.chatbox-container.minimized {
+    height: auto;
+    width: 50px;
+    overflow: hidden;
+}
+
+.chatbox-container.minimized .chatbox-header {
+    border-radius: 12px;
+    justify-content: center;
+}
+
+.chatbox-container.minimized .chatbox-header h4 {
+    display: none;
+}
+
+.chatbox-container.minimized .chatbox-body {
+    display: none;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .chatbox-container {
+        width: 300px;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+#send-message-btn {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#send-message-btn:hover {
+    transform: scale(1.1);
+}
+
+#chat-input-field {
+    padding: 10px 15px;
+    flex-grow: 1;
+    border: 1px solid var(--input-border);
+    border-radius: 20px;
+    outline: none;
+}
+/* Enhanced Chatbox Styles */
+.typing-indicator {
+    display: flex;
+    padding: 10px;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing 1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.follow-up-suggestions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--input-border);
+}
+
+.follow-up-suggestions p {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: var(--link-color);
+}
+
+.suggestion-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.suggestion-btn {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 15px;
+    padding: 5px 12px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.suggestion-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Make bot messages more conversational */
+.bot-message {
+    border-radius: 18px 18px 18px 4px;
+    line-height: 1.5;
+}
+
+.bot-message p {
+    margin-bottom: 0.5em;
+}
+
+.bot-message p:last-child {
+    margin-bottom: 0;
+}
+/* Chatbot Styles */
+.message.bot-message {
+    background-color: #f0f7ff;
+    border-radius: 18px 18px 18px 4px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    max-width: 80%;
+    align-self: flex-start;
+}
+
+.message.bot-message strong {
+    color: #2c5282;
+}
+
+.message.bot-message ul, 
+.message.bot-message ol {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.message.bot-message li {
+    margin-bottom: 5px;
+}
+
+.message.bot-message u {
+    text-decoration: none;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+/* Typing indicator */
+.typing-indicator {
+    display: flex;
+    padding: 10px 15px;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: #718096;
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing 1s infinite ease-in-out;
+}
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+/* Dark Theme Chatbox Styles */
+[data-theme="dark"] .message.bot-message {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .message.user-message {
+    background-color: #4a5568;
+    color: white;
+}
+
+[data-theme="dark"] .chat-input {
+    background-color: #1a202c;
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] #chat-input-field {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] .suggestion-btn {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] .suggestion-btn:hover {
+    background-color: #4a5568;
+}
+
+[data-theme="dark"] .typing-indicator span {
+    background-color: #e2e8f0;
+}
+
+[data-theme="dark"] .follow-up {
+    border-color: #4a5568;
+}
+
+[data-theme="dark"] .follow-up p {
+    color: #a0aec0;
+}
